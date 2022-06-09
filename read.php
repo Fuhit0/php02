@@ -1,21 +1,14 @@
 <?php
 
 // DB接続
-$dbn ='mysql:dbname=gsacf_d11_10;charset=utf8mb4;port=3306;host=localhost';
-$user = 'root';
-$pwd = '';
-
-try {
-  $pdo = new PDO($dbn, $user, $pwd);
-} catch (PDOException $e) {
-  echo json_encode(["db error" => "{$e->getMessage()}"]);
-  exit();
-}
+include('function.php');
+$pdo = connect_to_db();
 
 
 // SQL作成&実行①
 
 $sql1 = 'SELECT 
+reservation_id,
 user_name,
 mail,
 check_in,
@@ -48,6 +41,12 @@ foreach ($result1 as $record1) {
       <td>{$record1["check_out"]}</td>
       <td>{$record1["people"]}</td>
       <td>{$record1["room_type"]}</td>
+      <td>
+        <a href='edit.php?id={$record1["reservation_id"]}'>変更</a>
+      </td>
+      <td>
+        <a href='delete.php?id={$record1["reservation_id"]}'>キャンセル</a>
+      </td>
     </tr>
   ";
 }
@@ -137,6 +136,8 @@ foreach ($result2 as $record2) {
           <th>チェックアウト日</th>
           <th>人数</th>
           <th>お部屋タイプ</th>
+          <th>予約変更</th>
+          <th>予約キャンセル</th>
         </tr>
       </thead>
       <tbody>

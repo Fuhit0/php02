@@ -26,19 +26,8 @@ $roomtype = $_POST['roomtype'];
 
 
 // DB接続
-
-// 各種項目設定
-$dbn ='mysql:dbname=gsacf_d11_10;charset=utf8mb4;port=3306;host=localhost';
-$user = 'root';
-$pwd = '';
-
-// DB接続
-try {
-  $pdo = new PDO($dbn, $user, $pwd);
-} catch (PDOException $e) {
-  echo json_encode(["db error" => "{$e->getMessage()}"]);
-  exit();
-}
+include('function.php');
+$pdo = connect_to_db();
 
 // 「dbError:...」が表示されたらdb接続でエラーが発生していることがわかる．
 
