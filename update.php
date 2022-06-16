@@ -1,4 +1,7 @@
 <?php
+session_start();
+include("function.php");
+check_session_id();
 // var_dump($_POST);
 // exit();
 
@@ -24,7 +27,6 @@ $check_out = $_POST['check_out'];
 $people = $_POST['people'];
 
 // DB接続
-include('function.php');
 $pdo = connect_to_db();
 
 // 「dbError:...」が表示されたらdb接続でエラーが発生していることがわかる．

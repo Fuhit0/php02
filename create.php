@@ -1,4 +1,7 @@
 <?php
+session_start();
+include("function.php");
+check_session_id();
 // var_dump($_POST);
 // exit();
 
@@ -26,7 +29,6 @@ $roomtype = $_POST['roomtype'];
 
 
 // DB接続
-include('function.php');
 $pdo = connect_to_db();
 
 // 「dbError:...」が表示されたらdb接続でエラーが発生していることがわかる．

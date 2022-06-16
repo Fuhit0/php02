@@ -1,7 +1,9 @@
 <?php
+session_start();
+include("function.php");
+check_session_id();
 
 // DB接続
-include('function.php');
 $pdo = connect_to_db();
 
 $reservation_id = $_GET['id'];

@@ -1,11 +1,13 @@
 <?php
-
+session_start();
+include("function.php");
+check_session_id();
 // DB接続
-include('function.php');
 $pdo = connect_to_db();
 
 
 // SQL作成&実行①
+$Uname = $_SESSION["username"];
 
 $sql1 = 'SELECT 
 reservation_id,
@@ -18,7 +20,7 @@ room_type
 FROM 
 reservations_table
 where
-user_name = "cさん"';
+user_name = "'. $Uname .'" ';
 $stmt1 = $pdo->prepare($sql1);
 
 try {
@@ -71,11 +73,11 @@ FROM
 			FROM
 				reservations_table
 			WHERE
-				user_name = "cさん") as myreservations
+				user_name = "'. $Uname .'") as myreservations
 		ON
 			reservations_table.room_type = myreservations.room_type
 		WHERE
-			user_name <>"cさん") as others
+			user_name <>"'. $Uname .'") as others
 	ON
 		reservations_table.user_name = others.user_name) as recommed
 LEFT OUTER JOIN
@@ -84,7 +86,7 @@ LEFT OUTER JOIN
 	FROM
 		reservations_table
 	WHERE
-		user_name = "cさん") as myreservations2
+		user_name = "'. $Uname .'") as myreservations2
 ON
 	recommed.room_type = myreservations2.room_type
 WHERE
@@ -126,7 +128,9 @@ foreach ($result2 as $record2) {
 <body>
   <fieldset>
     <legend>予約履歴</legend>
+    <p>お帰りなさいませ、<?=$_SESSION["username"]?>さま</p>
     <a href="input.php">予約画面</a>
+    <a href="logout.php">一旦現実に戻る</a>
     <table border="1">
       <thead>
         <tr>

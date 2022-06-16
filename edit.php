@@ -1,7 +1,9 @@
 <?php
+session_start();
+include("function.php");
+check_session_id();
 
 // DB接続
-include('function.php');
 $pdo = connect_to_db();
 
 $reservation_id = $_GET['id'];
@@ -20,7 +22,7 @@ $record = $stmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
 
-// 以下HTML部分
+ <!-- 以下HTML部分 -->
 <form action="update.php" method="POST">
   <fieldset>
     <legend>予約編集画面</legend>

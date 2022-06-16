@@ -1,3 +1,10 @@
+<?php
+session_start();
+include("function.php");
+check_session_id();
+?>
+
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -10,12 +17,13 @@
 <body>
 <div>
   <a href="read.php">予約履歴</a>
+  <a href="logout.php">一旦現実に戻る</a>
 </div>
 <form class="contact-form" action="create.php" method="POST">
   <p>ご予約情報をご入力ください</p>
   <div class="item">
     <label class="label" for="name">名前</label>
-    <input id="name" type="text" name="name">
+    <input id="name" type="text" name="name" value=<?=$_SESSION["username"]?>>
   </div>
   <div class="item">
     <label class="label" for="e-mail">メールアドレス</label>
