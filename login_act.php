@@ -38,6 +38,7 @@ echo "<a href='login.php'>ログイン画面へ戻る</a>";
 }else{
 //OK
 $_SESSION = array();
+$_SESSION['user_id'] = $val['id'];
 $_SESSION["session_id"] = session_id();
 $_SESSION["username"] = $val["username"];
 $_SESSION["is_admin"] = $val["is_admin"];

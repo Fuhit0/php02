@@ -31,6 +31,7 @@ try {
 }
 
 // SQL実行の処理
+$user_id = $_SESSION['user_id'];
 
 $result1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
 $output1 = "";
@@ -44,10 +45,13 @@ foreach ($result1 as $record1) {
       <td>{$record1["people"]}</td>
       <td>{$record1["room_type"]}</td>
       <td>
-        <a href='edit.php?id={$record1["reservation_id"]}'>変更</a>
+        <a href='edit.php?id={$record1["reservation_id"]}'>ちょっと変更</a>
       </td>
       <td>
-        <a href='delete.php?id={$record1["reservation_id"]}'>キャンセル</a>
+        <a href='delete.php?id={$record1["reservation_id"]}'>やっぱやめる</a>
+      </td>
+      <td>
+        <a href='favorite_create.php?user_id={$user_id}&room_type={$record1["room_type"]}'>気に入った</a>
       </td>
     </tr>
   ";
@@ -142,6 +146,7 @@ foreach ($result2 as $record2) {
           <th>お部屋タイプ</th>
           <th>予約変更</th>
           <th>予約キャンセル</th>
+          <th>お気に入り登録</th>
         </tr>
       </thead>
       <tbody>

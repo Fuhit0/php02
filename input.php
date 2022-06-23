@@ -2,6 +2,36 @@
 session_start();
 include("function.php");
 check_session_id();
+
+// DB接続
+$pdo = connect_to_db();
+
+$sql1 = 'SELECT COUNT(id) as favorite_count FROM favorites_table WHERE room_type = "スタンダードダブルルーム"';
+$stmt1 = $pdo->query($sql1);
+$StD = $stmt1->fetch(PDO::FETCH_ASSOC);
+// var_dump($StD);
+// exit();
+
+$sql2 = 'SELECT COUNT(id) as favorite_count FROM favorites_table WHERE room_type = "ラージダブルルーム"';
+$stmt2 = $pdo->query($sql2);
+$LgD = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+$sql3 = 'SELECT COUNT(id) as favorite_count FROM favorites_table WHERE room_type = "スーペリアダブルルーム"';
+$stmt3 = $pdo->query($sql3);
+$SpD = $stmt3->fetch(PDO::FETCH_ASSOC);
+
+$sql4 = 'SELECT COUNT(id) as favorite_count FROM favorites_table WHERE room_type = "スタンダードスタジオ"';
+$stmt4 = $pdo->query($sql4);
+$StS = $stmt4->fetch(PDO::FETCH_ASSOC);
+
+$sql5 = 'SELECT COUNT(id) as favorite_count FROM favorites_table WHERE room_type = "デラックススタジオ"';
+$stmt5 = $pdo->query($sql5);
+$DxS = $stmt5->fetch(PDO::FETCH_ASSOC);
+
+$sql6 = 'SELECT COUNT(id) as favorite_count FROM favorites_table WHERE room_type = "スーペリアスタジオ"';
+$stmt6 = $pdo->query($sql6);
+$SpS = $stmt6->fetch(PDO::FETCH_ASSOC);
+
 ?>
 
 
@@ -51,12 +81,12 @@ check_session_id();
   <div class="item">
     <p class="label">ご希望のお部屋タイプ</p><br><br>
     <div class="radio-group">
-      <label><input type="radio" name="roomtype" value="スタンダードダブルルーム">スタンダードダブルルーム</label><br>
-      <label><input type="radio" name="roomtype" value="ラージダブルルーム">ラージダブルルーム</label><br>
-      <label><input type="radio" name="roomtype" value="スーペリアダブルルーム">スーペリアダブルルーム</label><br>
-      <label><input type="radio" name="roomtype" value="スタンダードスタジオ">スタンダードスタジオ</label><br>
-      <label><input type="radio" name="roomtype" value="スーペリアスタジオ">スーペリアスタジオ</label><br>
-      <label><input type="radio" name="roomtype" value="デラックススタジオ">デラックススタジオ</label>
+      <label><input type="radio" name="roomtype" value="スタンダードダブルルーム">スタンダードダブル　　　★みんなのお気に入り登録数<?= $StD["favorite_count"] ?></label><br>
+      <label><input type="radio" name="roomtype" value="ラージダブルルーム">ラージダブルルーム　　　★みんなのお気に入り登録数<?= $LgD["favorite_count"] ?></label><br>
+      <label><input type="radio" name="roomtype" value="スーペリアダブルルーム">スーペリアダブルルーム　★みんなのお気に入り登録数<?= $SpD["favorite_count"] ?></label><br>
+      <label><input type="radio" name="roomtype" value="スタンダードスタジオ">スタンダードスタジオ　　★みんなのお気に入り登録数<?= $StS["favorite_count"] ?></label><br>
+      <label><input type="radio" name="roomtype" value="スーペリアスタジオ">スーペリアスタジオ　　　★みんなのお気に入り登録数<?= $DxS["favorite_count"] ?></label><br>
+      <label><input type="radio" name="roomtype" value="デラックススタジオ">デラックススタジオ　　　★みんなのお気に入り登録数<?= $SpS["favorite_count"] ?></label>
     </div>
   </div>
   <div class="item no-label">
